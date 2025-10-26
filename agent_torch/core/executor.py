@@ -11,9 +11,11 @@ class BaseExecutor:
         self.model = model
 
     def _get_runner(self, config):
-        module_name = f"{self.model.__name__}.simulator"
+        module_name = self.model.__name__
         module = importlib.import_module(module_name)
-        registry = module.get_registry()
+
+        registry = module.registry
+        print("Registry: ", registry)
         runner = Runner(config, registry)
         return runner
 
